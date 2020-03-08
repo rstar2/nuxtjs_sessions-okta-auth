@@ -32,6 +32,24 @@ module.exports = {
    */
   plugins: [],
 
+  /*
+   ** Router config:
+
+   ** For Middlewares: Every middleware should be placed in the middleware/ directory.
+   ** The filename will be the name of the middleware
+   ** (middleware/auth.js will be the auth middleware).
+   ** The middleware will be executed in series in this order:
+   **      1. nuxt.config.js (in the order within the file)
+   **      2. Matched layouts (defined in "middleware: String[]")
+   **      3. Matched pages (defined in "middleware: String[]")
+   */
+  router: {
+    // call this router middleware always for every route - in client and SSR,
+    // later in it there could be separation for the client and SSR modes
+    // middleware: 'authorized',
+    middleware: ['authorized']
+  },
+
   serverMiddleware: [
     // Custom API server routes
     '~/server/middleware/api.js'
@@ -54,6 +72,8 @@ module.exports = {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    // Doc: https://auth.nuxtjs.org/usage
+    '@nuxtjs/auth',
 
     // Server sessions support (using express-session internally)
     [
@@ -89,6 +109,21 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  /*
+   ** Axios module configuration
+   ** See https://auth.nuxtjs.org/options
+   */
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'login', method: 'post', propertyName: 'data.token' },
+          user: { url: 'me', method: 'get', propertyName: 'data' },
+          logout: false
+        }
+      }
+    }
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
