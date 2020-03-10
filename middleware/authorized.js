@@ -1,3 +1,4 @@
+const consola = require('consola');
 /**
  * Route middleware that check if the user is already authenticated.
  * If route is desired to be only for authenticated users (e.g. meta.needsAuth === true)
@@ -12,11 +13,10 @@ export default function({ req, store, app, route, redirect }) {
   // if (process.server && !req) return;
 
   // If SSR (nuxt generate or nuxt pre-render), pass this middleware
-  if (process.server) return;
+  // if (process.server) return;
 
-  app.$logger.info('Route Middleware - auth');
+  consola.info('Middleware authorized');
 
-  // if needed to get the auth state from some other place and store it
   // const loggedUser = process.server ? getUserFromCookie(req) : getUserFromLocalStorage();
   // store.commit('SET_USER', loggedUser);
 

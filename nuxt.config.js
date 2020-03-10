@@ -52,7 +52,8 @@ module.exports = {
 
   serverMiddleware: [
     // Custom API server routes
-    '~/server/middleware/api.js'
+    '~/server/middleware/api.js',
+    '~/server/middleware/auth.js'
   ],
 
   /*

@@ -86,8 +86,6 @@ export const mutations = {
 export const actions = {
   /* async */ nuxtServerInit({ dispatch, commit }, { req }) {
     consola.warn('Store - nuxtServerInit');
-    // eslint-disable-next-line no-console
-    console.warn('Store - nuxtServerInit');
 
     const session = req.session;
 
