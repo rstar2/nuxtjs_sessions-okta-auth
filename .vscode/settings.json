@@ -3,5 +3,15 @@
         "activityBar.background": "#5B1307",
         "titleBar.activeBackground": "#7F1A09",
         "titleBar.activeForeground": "#FFFCFB"
-    }
+    },
+    "cSpell.words": [
+        "rowid"
+    ],
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder}/db/auth.db",
+            "dialect": "SQLite",
+            "name": "Session-okta-auth"
+        }
+    ]
 }

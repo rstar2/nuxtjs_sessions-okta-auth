@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid" method="POST">
-    <v-text-field v-model="name" name="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+    <v-text-field v-model="email" name="email" :counter="10" :rules="emailRules" label="Email" required></v-text-field>
 
     <v-text-field v-model="password" name="password" :rules="passwordRules" label="Password" required></v-text-field>
 
@@ -13,12 +13,12 @@ export default {
   data: () => ({
     valid: false,
 
-    name: '',
+    email: '',
     password: '',
 
-    nameRules: [
-      (v) => !!v || 'Name is required',
-      (v) => (v && v.length <= 10) || 'Name must be less than 10 characters'
+    emailules: [
+      (v) => !!v || 'Email is required',
+      (v) => (v && v.length <= 20) || 'Email must be less than 20 characters'
     ],
     passwordRules: [
       (v) => !!v || 'Password is required',
