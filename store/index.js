@@ -10,20 +10,37 @@ export const state = () => {
     /* -------------------------------------- */
 
     // protected data
-    /* Array */ data: []
+    /* Array */ data: [],
+
+    /**
+     * @type {String}
+     */
+    notification: null
   };
 };
 
 export const getters = {
+  /**
+   * @return {Boolean}
+   */
   isAuth(state) {
     return !!state.authUser;
   },
+  /**
+   * @return {Boolean}
+   */
   isAdmin(state) {
-    return !!state.authUser && !!state.authUser.claims.admin;
+    return !!state.authUser && state.authUser.claims && !!state.authUser.claims.admin;
   },
+  /**
+   * @return {Number|null}
+   */
   authUid(state) {
     return !!state.authUser && state.authUser.uid;
   },
+  /**
+   * @return {():Boolean}
+   */
   checkAuthUser(state, getters) {
     // 1. getters receive other getters as second argument
     // 2. return as a function, so it can be used like this from a VM:
@@ -34,6 +51,9 @@ export const getters = {
     };
   },
 
+  /**
+   * @return {Array}
+   */
   protectedData(state) {
     return state.data;
   }
@@ -51,25 +71,22 @@ export const getters = {
 export const mutations = {
   /**
    * @param {*} state
-   * @param {firebase.User?} user firebase.User instance enhanced with a 'claims' Object prop
+   * @param {{is:Number, email:String}|null} user user instance
    */
   authUser(state, user) {
-    // NOTE: don't use the 'payload' as it doesn't work in Vuex strict mode
-    // as Firebase internally changes some its user's (e.g. payload's) props
-    // state.authUser = user;
-    // so mutate the state only here
-    state.authUser = !user
-      ? null
-      : {
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          claims: user.claims
-        };
+    state.authUser = user;
   },
 
   data(state, data = []) {
     state.data = data;
+  },
+
+  /**
+   * @param {*} state
+   * @param {String} [message]
+   */
+  notification(state, message) {
+    state.notification = message;
   }
 };
 
@@ -89,9 +106,9 @@ export const actions = {
 
     const session = req.session;
 
-    const count = session ? session.count : -1;
+    const user = session ? session.user : null;
 
-    commit('data', { count });
+    commit('authUser', user);
   },
 
   /**

@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import { NEED_AUTH_ADMIN } from '@/lib/AuthMode.js';
+import { NEED_NO_AUTH } from '@/lib/AuthMode.js';
 
 export default {
   // The 'meta' prop will define the route meta data like in VueRouter
   meta: {
-    authMode: NEED_AUTH_ADMIN
+    authMode: NEED_NO_AUTH
   }
 };
 </script>

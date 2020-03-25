@@ -16,7 +16,7 @@ export default {
     email: '',
     password: '',
 
-    emailules: [
+    emailRules: [
       (v) => !!v || 'Email is required',
       (v) => (v && v.length <= 20) || 'Email must be less than 20 characters'
     ],
