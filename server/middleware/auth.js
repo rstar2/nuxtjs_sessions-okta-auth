@@ -26,6 +26,7 @@ function login(req, res, next, isRegister = false) {
   action
     .then((user) => {
       consola.info(`Server middleware auth - newly ${isRegister ? 'registered' : 'logged in'} user`);
+      // store the newly registered or logined user into the session (nuxt-session) 
       req.session.user = user;
 
       // res.status(200).send({ success: true });

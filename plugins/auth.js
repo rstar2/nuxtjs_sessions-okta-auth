@@ -11,7 +11,7 @@ export default function({ req, store }) {
   consola.info('Plugin auth');
 
   // if SSR (but NOT in the 'nuxt generate' case) - store the user in the store
-  // don't worry, that way it will be available in the client's initial store;s state also
+  // don't worry, that way it will be available in the client's initial store's state also
   if (process.server && req) {
     store.commit('authUser', req.session ? req.session.user : null);
   }
